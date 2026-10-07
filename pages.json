@@ -15,6 +15,22 @@
       "redirectDelay": 0,
       "buttons": [],
       "videos": []
+    },
+    "355-254-6588": {
+      "pageId": "509a1ff4-b6c5-4308-8785-941add3dfa9c",
+      "name": "",
+      "username": "",
+      "bio": "",
+      "profileImage": "",
+      "backgroundImage": "",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "destinationUrl": "https://stats.theplayerslottery.com/what-are-it-companies/",
+      "redirectMode": "302",
+      "redirectDelay": 3,
+      "buttons": [],
+      "videos": []
     }
   }
 }

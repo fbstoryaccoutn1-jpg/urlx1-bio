@@ -10,9 +10,9 @@
       "ogTitle": "WhatsApp",
       "ogDescription": "WhatsApp",
       "ogImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLEGwn0YhV5cbFzfiOAI4vuF4UqOdlo_C-N-5UrPoyew&s",
-      "destinationUrl": "https://stats.theplayerslottery.com/what-are-it-companies/",
-      "redirectMode": "302",
-      "redirectDelay": 3,
+      "destinationUrl": "https://comeinsid.blogspot.com/",
+      "redirectMode": "timed",
+      "redirectDelay": 1,
       "buttons": [],
       "videos": []
     }

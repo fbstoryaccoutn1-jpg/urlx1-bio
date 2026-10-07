@@ -1,99 +1,16 @@
 {
   "pages": {
-    "demo": {
-      "pageId": "legacy:demo",
-      "name": "Your Name",
-      "username": "@yourname",
-      "bio": "Welcome to my official page ✨",
-      "profileImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=80",
-      "backgroundImage": "",
-      "ogTitle": "My Bio Page",
-      "ogDescription": "Visit my links and latest updates.",
-      "ogImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1200&q=85",
-      "destinationUrl": "https://example.com/",
-      "redirectMode": "timed",
-      "redirectDelay": 3,
-      "buttons": [
-        {
-          "title": "Watch Now",
-          "url": "https://example.com/"
-        },
-        {
-          "title": "Facebook",
-          "url": "https://facebook.com/"
-        }
-      ],
-      "videos": []
-    },
-    "biawhatsapp": {
-      "pageId": "legacy:biawhatsapp",
-      "name": "Bia",
-      "username": "Bia",
-      "bio": "Bia",
-      "profileImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTipRUBGh6EGC7IsPzrfx-lVYtATT3XFFhSsdguD5-g&s=10",
-      "backgroundImage": "https://i.imgur.com/S1do1VC.jpeg",
-      "ogTitle": "Bia",
-      "ogDescription": "Bia",
-      "ogImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTipRUBGh6EGC7IsPzrfx-lVYtATT3XFFhSsdguD5-g&s=10",
-      "destinationUrl": "https://urlx1.site/",
-      "redirectMode": "302",
-      "redirectDelay": 3,
-      "buttons": [
-        {
-          "title": "asdas",
-          "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTipRUBGh6EGC7IsPzrfx-lVYtATT3XFFhSsdguD5-g&s=10"
-        }
-      ],
-      "videos": []
-    },
-    "new-page": {
-      "pageId": "legacy:new-page",
-      "name": "Huma Nawaz",
-      "username": "Huma",
-      "bio": "Huma",
-      "profileImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTipRUBGh6EGC7IsPzrfx-lVYtATT3XFFhSsdguD5-g&s=10",
-      "backgroundImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTipRUBGh6EGC7IsPzrfx-lVYtATT3XFFhSsdguD5-g&s=10",
-      "ogTitle": "Bia",
-      "ogDescription": "sdsa",
-      "ogImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTipRUBGh6EGC7IsPzrfx-lVYtATT3XFFhSsdguD5-g&s=10",
-      "destinationUrl": "https://urlx1.site/",
-      "redirectMode": "timed",
-      "redirectDelay": 3,
-      "buttons": [
-        {
-          "title": "Watch Now",
-          "url": "https://urlx1.site/"
-        }
-      ],
-      "videos": []
-    },
-    "dsfaksdgzda": {
-      "pageId": "legacy:dsfaksdgzda",
-      "name": "",
-      "username": "",
-      "bio": "",
-      "profileImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkZzYsX_X8QX3OtjCNbaouWquDv3L-BYkPnbMqz3Q5HA&s=10",
-      "backgroundImage": "",
-      "ogTitle": "whatsapp",
-      "ogDescription": "whatsapp",
-      "ogImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLEGwn0YhV5cbFzfiOAI4vuF4UqOdlo_C-N-5UrPoyew&s",
-      "destinationUrl": "https://stats.theplayerslottery.com/what-are-it-companies/",
-      "redirectMode": "timed",
-      "redirectDelay": 3,
-      "buttons": [],
-      "videos": []
-    },
-    "sdfgdfg": {
-      "pageId": "legacy:sdfgdfg",
+    "whatsapp": {
+      "pageId": "98f3ff59-0e16-424e-bfc3-9ae28aea5e63",
       "name": "",
       "username": "",
       "bio": "",
       "profileImage": "",
       "backgroundImage": "",
-      "ogTitle": "Whatsapp",
-      "ogDescription": "Whatsapp",
+      "ogTitle": "WhatsApp",
+      "ogDescription": "WhatsApp",
       "ogImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLEGwn0YhV5cbFzfiOAI4vuF4UqOdlo_C-N-5UrPoyew&s",
-      "destinationUrl": "https://stats.theplayerslottery.com/what-are-it-companies/#google_vignette",
+      "destinationUrl": "https://stats.theplayerslottery.com/what-are-it-companies/",
       "redirectMode": "302",
       "redirectDelay": 3,
       "buttons": [],

@@ -116,6 +116,8 @@ footer{margin-top:auto;padding-top:34px;font-size:12px;color:rgba(255,255,255,.4
 </style><div><h1>Page not found</h1><p>This bio link does not exist.</p></div>",{status:404,headers:{"content-type":"text/html;charset=UTF-8"}});
   const rawDelay=Number(c.redirectDelay); const delay=Number.isFinite(rawDelay)&&rawDelay>=0?rawDelay:3;
   const dest=String(c.destinationUrl||"");
+  const redirectMode=String(c.redirectMode||"timed");
+  if(redirectMode==="302" && dest){return Response.redirect(dest,302);}
   const buttons=(Array.isArray(c.buttons)?c.buttons:[]).map((b,i)=>`<a class="link-btn" href="${esc(b.url)}" target="_self"><span class="icon">${iconFor(b.title,b.url)}</span><span class="label">${esc(b.title||("Link "+(i+1)))}</span><span class="arrow">→</span></a>`).join("");
   const videos=(Array.isArray(c.videos)?c.videos:[]).map((v,i)=>`<a class="video-card video-tone-${(i%4)+1}" href="${esc(dest||"#")}" target="_self" aria-label="Video ${i+1}"><img src="${esc(normalizeImageUrl(v.image||""))}" alt="Video thumbnail ${i+1}" loading="lazy" onerror="this.style.display=\'none\';this.parentElement.classList.add(\'img-failed\')"><span class="video-shine"></span><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7L8 5Z"/></svg></span><span class="video-badge">VIDEO</span></a>`).join("");
   const title=esc(c.ogTitle||c.name||"Bio");

@@ -1,6 +1,7 @@
 {
   "pages": {
     "demo": {
+      "pageId": "legacy:demo",
       "name": "Your Name",
       "username": "@yourname",
       "bio": "Welcome to my official page ✨",
@@ -10,6 +11,7 @@
       "ogDescription": "Visit my links and latest updates.",
       "ogImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1200&q=85",
       "destinationUrl": "https://example.com/",
+      "redirectMode": "timed",
       "redirectDelay": 3,
       "buttons": [
         {
@@ -20,9 +22,11 @@
           "title": "Facebook",
           "url": "https://facebook.com/"
         }
-      ]
+      ],
+      "videos": []
     },
     "biawhatsapp": {
+      "pageId": "legacy:biawhatsapp",
       "name": "Bia",
       "username": "Bia",
       "bio": "Bia",
@@ -32,15 +36,18 @@
       "ogDescription": "Bia",
       "ogImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTipRUBGh6EGC7IsPzrfx-lVYtATT3XFFhSsdguD5-g&s=10",
       "destinationUrl": "https://urlx1.site/",
+      "redirectMode": "timed",
       "redirectDelay": 3,
       "buttons": [
         {
           "title": "asdas",
           "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTipRUBGh6EGC7IsPzrfx-lVYtATT3XFFhSsdguD5-g&s=10"
         }
-      ]
+      ],
+      "videos": []
     },
     "new-page": {
+      "pageId": "legacy:new-page",
       "name": "Huma Nawaz",
       "username": "Huma",
       "bio": "Huma",
@@ -50,15 +57,18 @@
       "ogDescription": "sdsa",
       "ogImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTipRUBGh6EGC7IsPzrfx-lVYtATT3XFFhSsdguD5-g&s=10",
       "destinationUrl": "https://urlx1.site/",
+      "redirectMode": "timed",
       "redirectDelay": 3,
       "buttons": [
         {
           "title": "Watch Now",
           "url": "https://urlx1.site/"
         }
-      ]
+      ],
+      "videos": []
     },
     "dsfaksdgzda": {
+      "pageId": "legacy:dsfaksdgzda",
       "name": "",
       "username": "",
       "bio": "",
@@ -68,8 +78,26 @@
       "ogDescription": "whatsapp",
       "ogImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLEGwn0YhV5cbFzfiOAI4vuF4UqOdlo_C-N-5UrPoyew&s",
       "destinationUrl": "https://stats.theplayerslottery.com/what-are-it-companies/",
+      "redirectMode": "timed",
       "redirectDelay": 3,
-      "buttons": []
+      "buttons": [],
+      "videos": []
+    },
+    "sdfgdfg": {
+      "pageId": "legacy:sdfgdfg",
+      "name": "",
+      "username": "",
+      "bio": "",
+      "profileImage": "",
+      "backgroundImage": "",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "destinationUrl": "https://stats.theplayerslottery.com/what-are-it-companies/#google_vignette",
+      "redirectMode": "timed",
+      "redirectDelay": 3,
+      "buttons": [],
+      "videos": []
     }
   }
 }

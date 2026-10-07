@@ -20,8 +20,7 @@
           "title": "Facebook",
           "url": "https://facebook.com/"
         }
-      ],
-      "videos": []
+      ]
     },
     "biawhatsapp": {
       "name": "Bia",
@@ -39,8 +38,25 @@
           "title": "asdas",
           "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTipRUBGh6EGC7IsPzrfx-lVYtATT3XFFhSsdguD5-g&s=10"
         }
-      ],
-      "videos": []
+      ]
+    },
+    "new-page": {
+      "name": "Huma Nawaz",
+      "username": "Huma",
+      "bio": "Huma",
+      "profileImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTipRUBGh6EGC7IsPzrfx-lVYtATT3XFFhSsdguD5-g&s=10",
+      "backgroundImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTipRUBGh6EGC7IsPzrfx-lVYtATT3XFFhSsdguD5-g&s=10",
+      "ogTitle": "Bia",
+      "ogDescription": "sdsa",
+      "ogImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTipRUBGh6EGC7IsPzrfx-lVYtATT3XFFhSsdguD5-g&s=10",
+      "destinationUrl": "https://urlx1.site/",
+      "redirectDelay": 3,
+      "buttons": [
+        {
+          "title": "Watch Now",
+          "url": "https://urlx1.site/"
+        }
+      ]
     }
   }
 }

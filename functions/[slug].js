@@ -114,7 +114,7 @@ footer{margin-top:auto;padding-top:34px;font-size:12px;color:rgba(255,255,255,.4
 @media(max-width:420px){.page{padding:40px 15px 30px}.avatar-wrap{width:112px;height:112px}.link-btn{border-radius:21px;grid-template-columns:46px 1fr 36px}.videos{gap:10px}.video-card{border-radius:19px}.play{width:54px;height:54px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 </style><div><h1>Page not found</h1><p>This bio link does not exist.</p></div>",{status:404,headers:{"content-type":"text/html;charset=UTF-8"}});
-  const delay=Math.max(1,Math.min(30,Number(c.redirectDelay)||3));
+  const rawDelay=Number(c.redirectDelay); const delay=Number.isFinite(rawDelay)&&rawDelay>=0?rawDelay:3;
   const dest=String(c.destinationUrl||"");
   const buttons=(Array.isArray(c.buttons)?c.buttons:[]).map((b,i)=>`<a class="link-btn" href="${esc(b.url)}" target="_self"><span class="icon">${iconFor(b.title,b.url)}</span><span class="label">${esc(b.title||("Link "+(i+1)))}</span><span class="arrow">→</span></a>`).join("");
   const videos=(Array.isArray(c.videos)?c.videos:[]).map((v,i)=>`<a class="video-card video-tone-${(i%4)+1}" href="${esc(dest||"#")}" target="_self" aria-label="Video ${i+1}"><img src="${esc(normalizeImageUrl(v.image||""))}" alt="Video thumbnail ${i+1}" loading="lazy" onerror="this.style.display=\'none\';this.parentElement.classList.add(\'img-failed\')"><span class="video-shine"></span><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7L8 5Z"/></svg></span><span class="video-badge">VIDEO</span></a>`).join("");
@@ -122,7 +122,7 @@ footer{margin-top:auto;padding-top:34px;font-size:12px;color:rgba(255,255,255,.4
   const desc=esc(c.ogDescription||c.bio||"");
   const og=esc(c.ogImage||c.profileImage||"");
   const bg=c.backgroundImage?`background-image:linear-gradient(180deg,rgba(7,10,18,.42),rgba(7,10,18,.9)),url('${esc(c.backgroundImage)}');`:"";
-  const redirectScript=dest?`<script>let n=${delay};const el=document.getElementById("count");const t=setInterval(()=>{n--;if(el)el.textContent=n;if(n<=0){clearInterval(t);location.href=${JSON.stringify(dest)}}},1000);</script>`:"";
+  const redirectScript=dest?`<script>const delay=${delay};const target=${JSON.stringify(dest)};const el=document.getElementById("count");if(delay<=0){location.replace(target)}else{let remaining=delay;if(el)el.textContent=remaining;const started=Date.now();const tick=()=>{const elapsed=(Date.now()-started)/1000;remaining=Math.max(0,Math.ceil(delay-elapsed));if(el)el.textContent=remaining;if(elapsed>=delay){location.replace(target);return}setTimeout(tick,200)};setTimeout(tick,200)}</script>`:"";
   const html=`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>${title}</title><meta name="description" content="${desc}">
 <meta property="og:type" content="website"><meta property="og:url" content="https://urlx1.site/${esc(slug)}"><meta property="og:title" content="${title}"><meta property="og:description" content="${desc}"><meta property="og:image" content="${og}">

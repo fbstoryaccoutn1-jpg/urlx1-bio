@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>urlx1.site — Admin</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0b0e15;color:#f7f8fb;font:15px/1.45 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{width:min(100%,980px);margin:0 auto;padding:34px 18px 70px}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:24px}
+h1{font-size:28px;margin:0}.sub{color:#8f98aa;margin-top:5px}.card{background:#111722;border:1px solid #222b3a;border-radius:20px;padding:20px;margin-bottom:18px;box-shadow:0 14px 38px rgba(0,0,0,.18)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}label{display:block;font-weight:700;font-size:13px;margin-bottom:7px;color:#cbd2df}
+input,textarea{width:100%;border:1px solid #2b3548;border-radius:12px;background:#0c111b;color:#fff;padding:12px 13px;outline:none}
+input:focus,textarea:focus{border-color:#5d72ff}textarea{min-height:92px;resize:vertical}.full{grid-column:1/-1}
+button{border:0;border-radius:12px;padding:12px 16px;font-weight:800;cursor:pointer}.primary{background:#fff;color:#0b0e15}.secondary{background:#20293a;color:#fff}.danger{background:#2a1820;color:#ff9db2}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap}.link-item{padding:14px;border:1px solid #263146;border-radius:14px;margin-top:10px;background:#0d131e}
+.link-grid{display:grid;grid-template-columns:1fr 1.4fr auto;gap:10px;align-items:end}.status{min-height:22px;color:#9ca6b7;font-size:13px}.login{max-width:420px;margin:12vh auto 0}
+.hidden{display:none}.preview{display:flex;align-items:center;gap:13px;padding:13px;background:#0c111b;border-radius:14px;margin-top:12px}.preview img{width:58px;height:58px;border-radius:50%;object-fit:cover;background:#222}
+@media(max-width:720px){.grid{grid-template-columns:1fr}.link-grid{grid-template-columns:1fr}.full{grid-column:auto}.top{align-items:flex-start;flex-direction:column}}
+</style></head><body><div class="wrap">
+<section id="loginBox" class="card login"><h1>Admin Login</h1><p class="sub">urlx1.site bio manager</p><label>Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Admin password"><div style="height:12px"></div><button class="primary" id="loginBtn">Login</button><p id="loginStatus" class="status"></p></section>
+<section id="panel" class="hidden">
+<div class="top"><div><h1>Bio Page Admin</h1><div class="sub">Edit profile, preview metadata and buttons.</div></div><div class="btnrow"><a href="/" target="_blank"><button class="secondary">Open Site ↗</button></a><button id="logoutBtn" class="secondary">Logout</button></div></div>
+<div class="card"><h2>Profile</h2><div class="grid">
+<div><label>Name</label><input id="name"></div><div><label>Username</label><input id="username"></div>
+<div class="full"><label>Bio</label><textarea id="bio"></textarea></div>
+<div class="full"><label>Profile Image URL</label><input id="profileImage" type="url"></div>
+<div class="full"><label>Background Image URL (optional)</label><input id="backgroundImage" type="url"></div>
+</div><div class="preview"><img id="avatarPreview"><div><strong id="namePreview">Preview</strong><div class="sub" id="userPreview"></div></div></div></div>
+<div class="card"><h2>Social Preview</h2><div class="grid">
+<div class="full"><label>OG Title</label><input id="ogTitle"></div><div class="full"><label>OG Description</label><textarea id="ogDescription"></textarea></div>
+<div class="full"><label>OG Image URL (recommended 1200×630)</label><input id="ogImage" type="url"></div></div></div>
+<div class="card"><div class="top" style="margin:0"><div><h2 style="margin:0">Buttons</h2><div class="sub">Up to 30 buttons.</div></div><button class="secondary" id="addBtn">+ Add Button</button></div><div id="buttons"></div></div>
+<div class="card"><div class="btnrow"><button class="primary" id="saveBtn">Save Changes</button><button class="secondary" id="reloadBtn">Reload</button></div><p class="status" id="status"></p></div>
+</section></div>
+<script>
+const $=id=>document.getElementById(id);let cfg={};let password=sessionStorage.getItem("bio_admin_password")||"";
+function showPanel(){$("loginBox").classList.add("hidden");$("panel").classList.remove("hidden")}
+function showLogin(){$("panel").classList.add("hidden");$("loginBox").classList.remove("hidden")}
+function fill(c){cfg=c||{};["name","username","bio","profileImage","backgroundImage","ogTitle","ogDescription","ogImage"].forEach(k=>$(k).value=cfg[k]||"");renderButtons();updatePreview()}
+function collect(){return{name:$("name").value,username:$("username").value,bio:$("bio").value,profileImage:$("profileImage").value,backgroundImage:$("backgroundImage").value,ogTitle:$("ogTitle").value,ogDescription:$("ogDescription").value,ogImage:$("ogImage").value,buttons:[...document.querySelectorAll(".link-item")].map(el=>({title:el.querySelector(".bt-title").value,url:el.querySelector(".bt-url").value}))}}
+function renderButtons(){$("buttons").innerHTML="";(cfg.buttons||[]).forEach(b=>addButton(b.title,b.url))}
+function esc(s=""){return String(s).replaceAll("&","&amp;").replaceAll('"',"&quot;").replaceAll("<","&lt;").replaceAll(">","&gt;")}
+function addButton(title="",url=""){const el=document.createElement("div");el.className="link-item";el.innerHTML='<div class="link-grid"><div><label>Button title</label><input class="bt-title" value="'+esc(title)+'" placeholder="Watch Now"></div><div><label>Destination URL</label><input class="bt-url" type="url" value="'+esc(url)+'" placeholder="https://..."></div><div class="btnrow"><button class="secondary up">↑</button><button class="secondary down">↓</button><button class="danger del">Delete</button></div></div>';el.querySelector(".del").onclick=()=>el.remove();el.querySelector(".up").onclick=()=>{const p=el.previousElementSibling;if(p)$("buttons").insertBefore(el,p)};el.querySelector(".down").onclick=()=>{const n=el.nextElementSibling;if(n)$("buttons").insertBefore(n,el)};$("buttons").appendChild(el)}
+function updatePreview(){$("avatarPreview").src=$("profileImage").value||"";$("namePreview").textContent=$("name").value||"Preview";$("userPreview").textContent=$("username").value||""}
+async function loadConfig(){$("status").textContent="Loading…";const r=await fetch("/api/config",{cache:"no-store"});const d=await r.json();if(!r.ok)throw new Error(d.error||"Could not load config");fill(d);$("status").textContent="Loaded."}
+async function save(){$("saveBtn").disabled=true;$("status").textContent="Saving…";try{const r=await fetch("/api/save",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({password,config:collect()})});const d=await r.json();if(!r.ok)throw new Error(d.error||"Save failed");$("status").textContent="✅ Saved. Refresh the public site.";cfg=collect()}catch(e){$("status").textContent="❌ "+e.message}finally{$("saveBtn").disabled=false}}
+async function login(){password=$("password").value;if(!password)return $("loginStatus").textContent="Enter your password.";sessionStorage.setItem("bio_admin_password",password);showPanel();try{await loadConfig()}catch(e){$("status").textContent="⚠️ "+e.message}}
+$("loginBtn").onclick=login;$("password").addEventListener("keydown",e=>{if(e.key==="Enter")login()});$("logoutBtn").onclick=()=>{sessionStorage.removeItem("bio_admin_password");password="";showLogin()};$("saveBtn").onclick=save;$("reloadBtn").onclick=()=>loadConfig().catch(e=>$("status").textContent="❌ "+e.message);$("addBtn").onclick=()=>addButton();["name","username","profileImage"].forEach(id=>$(id).addEventListener("input",updatePreview));if(password){showPanel();loadConfig().catch(e=>$("status").textContent="⚠️ "+e.message)}
+</script></body></html>

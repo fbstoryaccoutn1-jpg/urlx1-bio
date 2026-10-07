@@ -59,7 +59,7 @@ button:hover{transform:translateY(-1px)}button:active{transform:scale(.98)}
 
     <div class="card section"><h3>Link & Redirect</h3><div style="height:12px"></div><div class="grid">
       <div><label>Slug</label><input id="slug" placeholder="amina-whatsapp"><div class="slugpreview">https://urlx1.site/<span id="slugText">...</span></div></div>
-      <div><label>Redirect delay (seconds)</label><input id="redirectDelay" type="number" min="1" max="30" value="3"></div>
+      <div><label>Redirect delay (seconds)</label><input id="redirectDelay" type="number" min="0" step="0.1" value="3" placeholder="e.g. 0, 2.5, 10, 60"></div>
       <div class="full"><label>Main destination URL</label><input id="destinationUrl" type="url" placeholder="https://destination.com/..."></div>
     </div></div>
 
@@ -161,7 +161,7 @@ function collect(){
   return {
     name:$("name").value,username:$("username").value,bio:$("bio").value,profileImage:$("profileImage").value,backgroundImage:$("backgroundImage").value,
     ogTitle:$("ogTitle").value,ogDescription:$("ogDescription").value,ogImage:$("ogImage").value,
-    destinationUrl:$("destinationUrl").value,redirectDelay:Number($("redirectDelay").value)||3,
+    destinationUrl:$("destinationUrl").value,redirectDelay:(()=>{const n=Number($("redirectDelay").value);return Number.isFinite(n)&&n>=0?n:3})(),
     buttons:[...document.querySelectorAll("#buttons .linkitem")].map(el=>({title:el.querySelector(".bt-title").value,url:el.querySelector(".bt-url").value})),
     videos:[...document.querySelectorAll(".videoitem")].map(el=>({image:el.querySelector(".video-image").value}))
   };

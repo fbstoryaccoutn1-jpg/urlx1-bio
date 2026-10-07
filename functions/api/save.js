@@ -4,6 +4,7 @@ function cleanUrl(value){const s=String(value||"").trim();if(!s)return"";const u
 function cleanSlug(value){return String(value||"").toLowerCase().trim().replace(/[^a-z0-9-]+/g,"-").replace(/^-+|-+$/g,"").slice(0,80)}
 function sanitizePage(input){
   const buttons=Array.isArray(input.buttons)?input.buttons:[];
+  const videos=Array.isArray(input.videos)?input.videos:[];
   return{
     name:String(input.name||"").trim().slice(0,80),
     username:String(input.username||"").trim().slice(0,80),
@@ -15,7 +16,8 @@ function sanitizePage(input){
     ogImage:cleanUrl(input.ogImage),
     destinationUrl:cleanUrl(input.destinationUrl),
     redirectDelay:Math.max(1,Math.min(30,Number(input.redirectDelay)||3)),
-    buttons:buttons.slice(0,30).map(b=>({title:String(b.title||"").trim().slice(0,80),url:cleanUrl(b.url)})).filter(b=>b.title&&b.url)
+    buttons:buttons.slice(0,30).map(b=>({title:String(b.title||"").trim().slice(0,80),url:cleanUrl(b.url)})).filter(b=>b.title&&b.url),
+    videos:videos.slice(0,12).map(v=>({image:cleanUrl(v.image)})).filter(v=>v.image)
   }
 }
 export async function onRequestPost({request,env}){

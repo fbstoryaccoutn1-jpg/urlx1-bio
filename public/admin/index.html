@@ -69,6 +69,11 @@ button{border:0;border-radius:11px;padding:11px 14px;font-weight:800;cursor:poin
       <div id="buttons"></div>
     </div>
 
+    <div class="card section">
+      <div class="top" style="margin:0"><div><h3>Videos (optional)</h3><div class="muted">Paste only thumbnail/image URLs. Play icon is automatic; click uses the main destination URL.</div></div><button id="addVideo" class="secondary">+ Add Video</button></div>
+      <div id="videos"></div>
+    </div>
+
     <div class="card">
       <div class="btnrow"><button id="saveBtn" class="primary">Save All Changes</button><button id="reloadBtn" class="secondary">Reload</button></div>
       <div id="status" class="status"></div>
@@ -84,7 +89,7 @@ const $=id=>document.getElementById(id);
 let password=sessionStorage.getItem("urlx1_admin_password")||"";
 let db={pages:{}}; let selected=null; let originalSlug=null;
 
-const blankPage=()=>({name:"",username:"",bio:"",profileImage:"",backgroundImage:"",ogTitle:"",ogDescription:"",ogImage:"",destinationUrl:"",redirectDelay:3,buttons:[]});
+const blankPage=()=>({name:"",username:"",bio:"",profileImage:"",backgroundImage:"",ogTitle:"",ogDescription:"",ogImage:"",destinationUrl:"",redirectDelay:3,buttons:[],videos:[]});
 const cleanSlug=s=>String(s||"").toLowerCase().trim().replace(/[^a-z0-9-]+/g,"-").replace(/^-+|-+$/g,"").slice(0,80);
 const esc=s=>String(s||"").replaceAll("&","&amp;").replaceAll('"',"&quot;").replaceAll("<","&lt;").replaceAll(">","&gt;");
 
@@ -115,7 +120,7 @@ function selectPage(slug){
   $("empty").classList.add("hidden"); $("editor").classList.remove("hidden");
   $("slug").value=slug;
   ["name","username","bio","profileImage","backgroundImage","ogTitle","ogDescription","ogImage","destinationUrl","redirectDelay"].forEach(k=>$(k).value=p[k]??"");
-  renderButtons(p.buttons||[]); updateUrl(); renderList();
+  renderButtons(p.buttons||[]); renderVideos(p.videos||[]); updateUrl(); renderList();
 }
 function renderButtons(items){
   $("buttons").innerHTML=""; items.forEach(b=>addButton(b.title,b.url));
@@ -128,12 +133,24 @@ function addButton(title="",url=""){
   el.querySelector(".down").onclick=()=>{const n=el.nextElementSibling;if(n)$("buttons").insertBefore(n,el)};
   $("buttons").appendChild(el);
 }
+function renderVideos(items){
+  $("videos").innerHTML=""; items.forEach(v=>addVideo(v.image));
+}
+function addVideo(image=""){
+  const el=document.createElement("div"); el.className="linkitem videoitem";
+  el.innerHTML='<div class="linkgrid" style="grid-template-columns:1fr auto"><div><label>Thumbnail / Image URL</label><input class="video-image" type="url" value="'+esc(image)+'" placeholder="https://..."></div><div class="btnrow"><button class="secondary up">↑</button><button class="secondary down">↓</button><button class="danger del">Delete</button></div></div>';
+  el.querySelector(".del").onclick=()=>el.remove();
+  el.querySelector(".up").onclick=()=>{const p=el.previousElementSibling;if(p)$("videos").insertBefore(el,p)};
+  el.querySelector(".down").onclick=()=>{const n=el.nextElementSibling;if(n)$("videos").insertBefore(n,el)};
+  $("videos").appendChild(el);
+}
 function collect(){
   return {
     name:$("name").value,username:$("username").value,bio:$("bio").value,profileImage:$("profileImage").value,backgroundImage:$("backgroundImage").value,
     ogTitle:$("ogTitle").value,ogDescription:$("ogDescription").value,ogImage:$("ogImage").value,
     destinationUrl:$("destinationUrl").value,redirectDelay:Number($("redirectDelay").value)||3,
-    buttons:[...document.querySelectorAll(".linkitem")].map(el=>({title:el.querySelector(".bt-title").value,url:el.querySelector(".bt-url").value}))
+    buttons:[...document.querySelectorAll(".linkitem")].map(el=>({title:el.querySelector(".bt-title").value,url:el.querySelector(".bt-url").value})),
+    videos:[...document.querySelectorAll(".videoitem")].map(el=>({image:el.querySelector(".video-image").value}))
   };
 }
 function updateUrl(){
@@ -178,7 +195,7 @@ async function login(){
 }
 $("loginBtn").onclick=login; $("password").addEventListener("keydown",e=>{if(e.key==="Enter")login()});
 $("logoutBtn").onclick=()=>{sessionStorage.removeItem("urlx1_admin_password");location.reload()};
-$("newBtn").onclick=newPage; $("addButton").onclick=()=>addButton(); $("deleteBtn").onclick=deletePage; $("saveBtn").onclick=saveAll;
+$("newBtn").onclick=newPage; $("addButton").onclick=()=>addButton(); $("addVideo").onclick=()=>addVideo(); $("deleteBtn").onclick=deletePage; $("saveBtn").onclick=saveAll;
 $("reloadBtn").onclick=()=>load().then(()=>{if(selected&&db.pages[selected])selectPage(selected)}).catch(e=>$("status").textContent="❌ "+e.message);
 $("slug").addEventListener("input",updateUrl);
 $("openBtn").onclick=()=>{const s=cleanSlug($("slug").value); if(s) window.open("/"+s,"_blank")};

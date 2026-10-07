@@ -34,7 +34,12 @@
       "ogImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTipRUBGh6EGC7IsPzrfx-lVYtATT3XFFhSsdguD5-g&s=10",
       "destinationUrl": "https://urlx1.site/",
       "redirectDelay": 3,
-      "buttons": [],
+      "buttons": [
+        {
+          "title": "asdas",
+          "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTipRUBGh6EGC7IsPzrfx-lVYtATT3XFFhSsdguD5-g&s=10"
+        }
+      ],
       "videos": []
     }
   }

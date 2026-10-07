@@ -17,7 +17,7 @@ h1,h2,h3{margin:0;letter-spacing:-.35px}.muted{color:var(--muted)}.pages{display
 .pageitem strong{display:block}.pageitem small{color:#91a0b8}
 .top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:17px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.full{grid-column:1/-1}
 label{display:block;font-size:12px;font-weight:850;color:#cbd5e1;margin:0 0 7px}
-input,textarea{width:100%;padding:13px 14px;border-radius:14px;border:1px solid #2a354c;background:linear-gradient(145deg,#0b101a,#0a0f18);color:#fff;outline:none;transition:border-color .18s ease,box-shadow .18s ease,background .18s ease}
+input,textarea,select{width:100%;padding:13px 14px;border-radius:14px;border:1px solid #2a354c;background:linear-gradient(145deg,#0b101a,#0a0f18);color:#fff;outline:none;transition:border-color .18s ease,box-shadow .18s ease,background .18s ease}
 input:focus,textarea:focus{border-color:#7c68e8;box-shadow:0 0 0 3px rgba(139,92,246,.11);background:#0c111c}
 textarea{min-height:96px;resize:vertical}
 button{border:1px solid transparent;border-radius:14px;padding:11px 15px;font-weight:850;cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,background .16s ease}
@@ -59,7 +59,7 @@ button:hover{transform:translateY(-1px)}button:active{transform:scale(.98)}
 
     <div class="card section"><h3>Link & Redirect</h3><div style="height:12px"></div><div class="grid">
       <div><label>Slug</label><input id="slug" placeholder="amina-whatsapp"><div class="slugpreview">https://urlx1.site/<span id="slugText">...</span></div></div>
-      <div><label>Redirect delay (seconds)</label><input id="redirectDelay" type="number" min="0" step="0.1" value="3" placeholder="e.g. 0, 2.5, 10, 60"></div>
+      <div><label>Redirect Mode</label><select id="redirectMode"><option value="timed">Timed Redirect</option><option value="302">Instant 302 Redirect</option></select></div><div><label>Redirect delay (seconds)</label><input id="redirectDelay" type="number" min="0" step="0.1" value="3" placeholder="e.g. 0, 2.5, 10, 60"></div>
       <div class="full"><label>Main destination URL</label><input id="destinationUrl" type="url" placeholder="https://destination.com/..."></div>
     </div></div>
 
@@ -102,7 +102,7 @@ const $=id=>document.getElementById(id);
 let password=sessionStorage.getItem("urlx1_admin_password")||"";
 let db={pages:{}}; let selected=null; let originalSlug=null;
 
-const blankPage=()=>({name:"",username:"",bio:"",profileImage:"",backgroundImage:"",ogTitle:"",ogDescription:"",ogImage:"",destinationUrl:"",redirectDelay:3,buttons:[],videos:[]});
+const blankPage=()=>({name:"",username:"",bio:"",profileImage:"",backgroundImage:"",ogTitle:"",ogDescription:"",ogImage:"",destinationUrl:"",redirectMode:"timed",redirectDelay:3,buttons:[],videos:[]});
 const cleanSlug=s=>String(s||"").toLowerCase().trim().replace(/[^a-z0-9-]+/g,"-").replace(/^-+|-+$/g,"").slice(0,80);
 const esc=s=>String(s||"").replaceAll("&","&amp;").replaceAll('"',"&quot;").replaceAll("<","&lt;").replaceAll(">","&gt;");
 
@@ -132,7 +132,7 @@ function selectPage(slug){
   const p=db.pages[slug]||blankPage();
   $("empty").classList.add("hidden"); $("editor").classList.remove("hidden");
   $("slug").value=slug;
-  ["name","username","bio","profileImage","backgroundImage","ogTitle","ogDescription","ogImage","destinationUrl","redirectDelay"].forEach(k=>$(k).value=p[k]??"");
+  ["name","username","bio","profileImage","backgroundImage","ogTitle","ogDescription","ogImage","destinationUrl","redirectDelay"].forEach(k=>$(k).value=p[k]??""); $("redirectMode").value=p.redirectMode||"timed"; toggleDelay();
   renderButtons(p.buttons||[]); renderVideos(p.videos||[]); updateUrl(); renderList();
 }
 function renderButtons(items){
@@ -161,7 +161,7 @@ function collect(){
   return {
     name:$("name").value,username:$("username").value,bio:$("bio").value,profileImage:$("profileImage").value,backgroundImage:$("backgroundImage").value,
     ogTitle:$("ogTitle").value,ogDescription:$("ogDescription").value,ogImage:$("ogImage").value,
-    destinationUrl:$("destinationUrl").value,redirectDelay:(()=>{const n=Number($("redirectDelay").value);return Number.isFinite(n)&&n>=0?n:3})(),
+    destinationUrl:$("destinationUrl").value,redirectMode:$("redirectMode").value,redirectDelay:(()=>{const n=Number($("redirectDelay").value);return Number.isFinite(n)&&n>=0?n:3})(),
     buttons:[...document.querySelectorAll("#buttons .linkitem")].map(el=>({title:el.querySelector(".bt-title").value,url:el.querySelector(".bt-url").value})),
     videos:[...document.querySelectorAll(".videoitem")].map(el=>({image:el.querySelector(".video-image").value}))
   };
@@ -215,7 +215,7 @@ $("loginBtn").onclick=login; $("password").addEventListener("keydown",e=>{if(e.k
 $("logoutBtn").onclick=()=>{sessionStorage.removeItem("urlx1_admin_password");location.reload()};
 $("newBtn").onclick=newPage; $("addButton").onclick=()=>addButton(); $("addVideo").onclick=()=>addVideo(); $("deleteBtn").onclick=deletePage; $("saveBtn").onclick=saveAll;
 $("reloadBtn").onclick=()=>load().then(()=>{if(selected&&db.pages[selected])selectPage(selected)}).catch(e=>$("status").textContent="❌ "+e.message);
-$("slug").addEventListener("input",updateUrl);
+function toggleDelay(){const instant=$("redirectMode").value==="302";$("redirectDelay").disabled=instant;$("redirectDelay").style.opacity=instant?".45":"1"} $("redirectMode").addEventListener("change",toggleDelay); $("slug").addEventListener("input",updateUrl);
 $("openBtn").onclick=()=>{const s=cleanSlug($("slug").value); if(s) window.open("/"+s,"_blank")};
 
 if(password){

@@ -97,7 +97,7 @@ export async function onRequestPost({request,env}){
     const current=await ghFetch(endpoint+"?ref="+encodeURIComponent(branch)+"&t="+Date.now(),{headers},1);
     if(!current.ok){
       const detail=await current.text();
-      return Response.json({error:"Could not read pages.json ("+current.status+").",detail:detail.slice(0,1000)},{status:502});
+      return Response.json({error:"Could not load saved data ("+current.status+").",detail:detail.slice(0,1000)},{status:502});
     }
 
     const meta=await current.json();
@@ -149,14 +149,14 @@ export async function onRequestPost({request,env}){
 
     if(!update.ok){
       const detail=await update.text();
-      return Response.json({error:"GitHub save failed ("+update.status+")",detail:detail.slice(0,1500)},{status:502});
+      return Response.json({error:"Save failed ("+update.status+")",detail:detail.slice(0,1500)},{status:502});
     }
 
     const updateJson=await update.json().catch(()=>({}));
     const verify=await ghFetch(endpoint+"?ref="+encodeURIComponent(branch)+"&verify="+Date.now(),{headers},1);
 
     if(!verify.ok){
-      return Response.json({error:"GitHub verification read failed ("+verify.status+")."},{status:502});
+      return Response.json({error:"Save verification failed ("+verify.status+")."},{status:502});
     }
 
     const verifyMeta=await verify.json();
@@ -164,7 +164,7 @@ export async function onRequestPost({request,env}){
 
     if(JSON.stringify(savedDb.pages||{})!==JSON.stringify(pages)){
       return Response.json({
-        error:"GitHub verification failed",
+        error:"Save verification failed",
         detail:"The saved pages.json does not exactly match the submitted data.",
         commit:updateJson.commit?.sha||null
       },{status:502});
@@ -173,7 +173,7 @@ export async function onRequestPost({request,env}){
     return Response.json({
       ok:true,
       verified:true,
-      message:"Saved and verified.",
+      message:"Saved successfully.",
       count:Object.keys(pages).length,
       slugs:Object.keys(pages).sort(),
       commit:updateJson.commit?.sha||null

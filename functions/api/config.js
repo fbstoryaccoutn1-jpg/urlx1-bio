@@ -5,7 +5,7 @@ export async function onRequestGet({env}){
   const branch=env.GITHUB_BRANCH||"main";
   const headers={"Accept":"application/vnd.github+json","User-Agent":"urlx1-bio"};
   if(env.GITHUB_TOKEN)headers["Authorization"]="Bearer "+env.GITHUB_TOKEN;
-  const r=await fetch(`${GH_API}/repos/${encodeURIComponent(env.GITHUB_OWNER)}/${encodeURIComponent(env.GITHUB_REPO)}/contents/config.json?ref=${encodeURIComponent(branch)}`,{headers});
+  const r=await fetch(`${GH_API}/repos/${encodeURIComponent(env.GITHUB_OWNER)}/${encodeURIComponent(env.GITHUB_REPO)}/contents/pages.json?ref=${encodeURIComponent(branch)}`,{headers});
   if(!r.ok)return Response.json({error:"GitHub returned "+r.status},{status:502});
   const d=await r.json();
   return Response.json(JSON.parse(b64ToUtf8(d.content)),{headers:{"cache-control":"no-store"}});

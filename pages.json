@@ -36,7 +36,7 @@
       "ogDescription": "Bia",
       "ogImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTipRUBGh6EGC7IsPzrfx-lVYtATT3XFFhSsdguD5-g&s=10",
       "destinationUrl": "https://urlx1.site/",
-      "redirectMode": "timed",
+      "redirectMode": "302",
       "redirectDelay": 3,
       "buttons": [
         {

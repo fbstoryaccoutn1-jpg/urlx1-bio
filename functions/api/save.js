@@ -15,6 +15,7 @@ function sanitizePage(input){
     ogDescription:String(input.ogDescription||"").trim().slice(0,300),
     ogImage:cleanUrl(input.ogImage),
     destinationUrl:cleanUrl(input.destinationUrl),
+    redirectMode:String(input.redirectMode)==="302"?"302":"timed",
     redirectDelay:(()=>{const n=Number(input.redirectDelay);return Number.isFinite(n)&&n>=0?n:3})(),
     buttons:buttons.slice(0,30).map(b=>({title:String(b.title||"").trim().slice(0,80),url:cleanUrl(b.url)})).filter(b=>b.title&&b.url),
     videos:videos.slice(0,12).map(v=>({image:cleanUrl(v.image)})).filter(v=>v.image)

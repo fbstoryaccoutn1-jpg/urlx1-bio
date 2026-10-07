@@ -107,6 +107,7 @@ export async function onRequestPost({request,env}){
     const inputPages=body.pages&&typeof body.pages==="object"?body.pages:{};
     const pages={};
     const seen=new Set();
+    const seenIds=new Set();
 
     try{
       for(const [rawSlug,inputPage] of Object.entries(inputPages)){
@@ -117,6 +118,9 @@ export async function onRequestPost({request,env}){
         seen.add(slug);
 
         const page=sanitizePage(inputPage||{},slug);
+        if(seenIds.has(page.pageId))throw new Error("Duplicate page identity detected. Reload the admin panel and try again.");
+        seenIds.add(page.pageId);
+        if(page.redirectMode==="302"&&!page.destinationUrl)throw new Error("Instant 302 Redirect requires a destination URL.");
         const currentAtSlug=currentPages[slug];
 
         if(currentAtSlug){

@@ -94,7 +94,7 @@
       "ogDescription": "",
       "ogImage": "",
       "destinationUrl": "https://stats.theplayerslottery.com/what-are-it-companies/#google_vignette",
-      "redirectMode": "timed",
+      "redirectMode": "302",
       "redirectDelay": 3,
       "buttons": [],
       "videos": []

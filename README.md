@@ -1,30 +1,27 @@
-# urlx1.site Bio Page
+# urlx1.site Multi Bio Pages
 
-Cloudflare Pages + GitHub powered bio page with no KV, D1 or R2.
+No KV, D1 or R2. Persistent bio-page settings are stored in `pages.json` in this GitHub repository.
 
-## Cloudflare Pages settings
-- Production branch: main
-- Build command: exit 0
-- Build output directory: public
+## Public routes
+- `/` — official urlx1.site homepage
+- `/admin/` — password-protected admin manager
+- `/<slug>` — generated bio page, e.g. `/amina-whatsapp`
+- Each bio page uses the same theme and can have its own profile info, social preview, buttons, redirect destination and delay.
 
-## Environment variables / secrets
-Add these in Cloudflare Pages → Settings → Variables and Secrets:
+## Cloudflare Pages
+- Production branch: `main`
+- Framework preset: None
+- Build command: `exit 0`
+- Build output directory: `public`
 
-- GITHUB_OWNER = fbstoryaccoutn1-jpg
-- GITHUB_REPO = urlx1-bio
-- GITHUB_BRANCH = main
-- GITHUB_TOKEN = fine-grained GitHub token with Contents: Read and write for this repo
-- ADMIN_PASSWORD = your chosen admin password
+## Variables and secrets
+- `GITHUB_OWNER=fbstoryaccoutn1-jpg`
+- `GITHUB_REPO=urlx1-bio`
+- `GITHUB_BRANCH=main`
+- `GITHUB_TOKEN` = fine-grained token for this repository, Contents read/write
+- `ADMIN_PASSWORD` = your chosen admin password
 
-Set GITHUB_TOKEN and ADMIN_PASSWORD as encrypted secrets.
+Keep GITHUB_TOKEN and ADMIN_PASSWORD as Cloudflare secrets.
 
-## Routes
-- Public bio: /
-- Admin panel: /admin/
-- Config API: /api/config
-- Save API: /api/save
-
-## Custom domain
-Attach: urlx1.site
-
-The public page is server-rendered, so OG tags are included in the initial HTML for social preview crawlers.
+## Creating pages
+Log in at `/admin/`, press **+ New**, choose the slug, fill only the fields you want, set the main destination and redirect delay, optionally add buttons, then **Save All Changes**.

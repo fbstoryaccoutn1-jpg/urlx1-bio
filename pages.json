@@ -12,7 +12,7 @@
       "ogImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLEGwn0YhV5cbFzfiOAI4vuF4UqOdlo_C-N-5UrPoyew&s",
       "destinationUrl": "https://comeinsid.blogspot.com/",
       "redirectMode": "timed",
-      "redirectDelay": 1,
+      "redirectDelay": 0,
       "buttons": [],
       "videos": []
     }

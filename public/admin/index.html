@@ -211,7 +211,7 @@ async function saveAll(){
     const r=await fetch("/api/save",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({password,pages:db.pages})});
     const raw=await r.text(); let d={}; try{d=JSON.parse(raw)}catch{throw new Error("Server returned non-JSON ("+r.status+"): "+raw.slice(0,180).replace(/\\s+/g," "))} if(!r.ok) throw new Error((d.error||"Save failed")+(d.detail?" — "+d.detail:""));
     if(!d.verified) throw new Error("Server did not verify GitHub persistence.");
-    $("status").textContent="✅ Saved & verified on GitHub.";
+    $("status").textContent="✅ Saved successfully.";
     await load();
     if(selected&&db.pages[selected]) selectPage(selected);
     else if(selected) throw new Error("Save response succeeded but page is missing after reload.");

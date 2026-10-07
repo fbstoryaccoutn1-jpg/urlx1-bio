@@ -9,12 +9,31 @@
       "ogTitle": "My Bio Page",
       "ogDescription": "Visit my links and latest updates.",
       "ogImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1200&q=85",
-      "destinationUrl": "https://example.com",
+      "destinationUrl": "https://example.com/",
       "redirectDelay": 3,
       "buttons": [
-        {"title":"Watch Now","url":"https://example.com"},
-        {"title":"Facebook","url":"https://facebook.com/"}
+        {
+          "title": "Watch Now",
+          "url": "https://example.com/"
+        },
+        {
+          "title": "Facebook",
+          "url": "https://facebook.com/"
+        }
       ]
+    },
+    "biawhatsapp": {
+      "name": "Bia",
+      "username": "Bia",
+      "bio": "Bia",
+      "profileImage": "https://i.imgur.com/S1do1VC.jpeg",
+      "backgroundImage": "https://i.imgur.com/S1do1VC.jpeg",
+      "ogTitle": "Bia",
+      "ogDescription": "Bia",
+      "ogImage": "https://i.imgur.com/S1do1VC.jpeg",
+      "destinationUrl": "",
+      "redirectDelay": 3,
+      "buttons": []
     }
   }
 }

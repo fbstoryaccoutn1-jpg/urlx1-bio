@@ -41,5 +41,29 @@ export async function onRequestPost({request,env}){try{
   const meta=await current.json();
   const update=await fetch(endpoint,{method:"PUT",headers,body:JSON.stringify({message:"Update bio pages from admin panel",content:utf8ToBase64(JSON.stringify({pages},null,2)+"\n"),sha:meta.sha,branch})});
   if(!update.ok){const detail=await update.text();return Response.json({error:"GitHub save failed ("+update.status+")",detail},{status:502})}
-  return Response.json({ok:true,message:"Saved successfully.",count:Object.keys(pages).length},{headers:{"cache-control":"no-store"}});
+  const updateJson=await update.json().catch(()=>({}));
+  const verifyUrl=endpoint+"?ref="+encodeURIComponent(branch)+"&verify="+Date.now();
+  const verifyResp=await fetch(verifyUrl,{headers:{...headers,"Cache-Control":"no-cache"}});
+  if(!verifyResp.ok)return Response.json({error:"GitHub verification read failed ("+verifyResp.status+")."},{status:502});
+  const verifyMeta=await verifyResp.json();
+  const raw=atob(String(verifyMeta.content||"").replace(/\n/g,""));
+  const bytes=Uint8Array.from(raw,c=>c.charCodeAt(0));
+  const savedDb=JSON.parse(new TextDecoder().decode(bytes));
+  const expectedSlugs=Object.keys(pages).sort();
+  const savedSlugs=Object.keys(savedDb.pages||{}).sort();
+  if(JSON.stringify(expectedSlugs)!==JSON.stringify(savedSlugs)){
+    return Response.json({
+      error:"GitHub verification failed",
+      detail:"Expected: "+expectedSlugs.join(", ")+" | Saved: "+savedSlugs.join(", "),
+      commit:updateJson.commit?.sha||null
+    },{status:502,headers:{"cache-control":"no-store"}});
+  }
+  return Response.json({
+    ok:true,
+    verified:true,
+    message:"Saved and verified.",
+    count:expectedSlugs.length,
+    slugs:savedSlugs,
+    commit:updateJson.commit?.sha||null
+  },{headers:{"cache-control":"no-store"}});
 }catch(e){return Response.json({error:"Save endpoint crashed",detail:String(e&&e.message||e)},{status:500,headers:{"cache-control":"no-store"}})}}

@@ -100,9 +100,11 @@ button:hover{transform:translateY(-1px)}button:active{transform:scale(.98)}
 <script>
 const $=id=>document.getElementById(id);
 let password=sessionStorage.getItem("urlx1_admin_password")||"";
-let db={pages:{}}; let selected=null; let originalSlug=null;
+let db={pages:{}}; let selected=null; let originalSlug=null; let persistedSlugs=new Set();
+const RESERVED_SLUGS=new Set(["admin","api","404","favicon.ico","robots.txt","sitemap.xml","assets","functions"]);
+const makePageId=()=>{try{return crypto.randomUUID()}catch{return "page-"+Date.now()+"-"+Math.random().toString(36).slice(2)}};
 
-const blankPage=()=>({name:"",username:"",bio:"",profileImage:"",backgroundImage:"",ogTitle:"",ogDescription:"",ogImage:"",destinationUrl:"",redirectMode:"timed",redirectDelay:3,buttons:[],videos:[]});
+const blankPage=()=>({pageId:makePageId(),name:"",username:"",bio:"",profileImage:"",backgroundImage:"",ogTitle:"",ogDescription:"",ogImage:"",destinationUrl:"",redirectMode:"timed",redirectDelay:3,buttons:[],videos:[]});
 const cleanSlug=s=>String(s||"").toLowerCase().trim().replace(/[^a-z0-9-]+/g,"-").replace(/^-+|-+$/g,"").slice(0,80);
 const esc=s=>String(s||"").replaceAll("&","&amp;").replaceAll('"',"&quot;").replaceAll("<","&lt;").replaceAll(">","&gt;");
 
@@ -114,7 +116,10 @@ async function verifyPassword(){
 async function load(){
   const r=await fetch("/api/config",{cache:"no-store"}); const d=await r.json();
   if(!r.ok) throw new Error(d.error||"Could not load pages");
-  db=d.pages?d:{pages:{}}; renderList();
+  db=d.pages?d:{pages:{}};
+  for(const [slug,p] of Object.entries(db.pages)){if(!p.pageId)p.pageId="legacy:"+slug}
+  persistedSlugs=new Set(Object.keys(db.pages));
+  renderList();
 }
 function renderList(){
   const box=$("pagesList"); box.innerHTML="";
@@ -129,7 +134,7 @@ function renderList(){
 }
 function selectPage(slug){
   selected=slug; originalSlug=slug;
-  const p=db.pages[slug]||blankPage();
+  const p=db.pages[slug]||blankPage(); if(!p.pageId)p.pageId="legacy:"+slug;
   $("empty").classList.add("hidden"); $("editor").classList.remove("hidden");
   $("slug").value=slug;
   ["name","username","bio","profileImage","backgroundImage","ogTitle","ogDescription","ogImage","destinationUrl","redirectDelay"].forEach(k=>$(k).value=p[k]??""); $("redirectMode").value=p.redirectMode||"timed"; toggleDelay();
@@ -159,6 +164,7 @@ function addVideo(image=""){
 }
 function collect(){
   return {
+    pageId:(db.pages[originalSlug||selected]?.pageId||db.pages[selected]?.pageId||makePageId()),
     name:$("name").value,username:$("username").value,bio:$("bio").value,profileImage:$("profileImage").value,backgroundImage:$("backgroundImage").value,
     ogTitle:$("ogTitle").value,ogDescription:$("ogDescription").value,ogImage:$("ogImage").value,
     destinationUrl:$("destinationUrl").value,redirectMode:$("redirectMode").value,redirectDelay:(()=>{const n=Number($("redirectDelay").value);return Number.isFinite(n)&&n>=0?n:3})(),
@@ -166,8 +172,20 @@ function collect(){
     videos:[...document.querySelectorAll(".videoitem")].map(el=>({image:el.querySelector(".video-image").value}))
   };
 }
+function slugProblem(slug){
+  if(!slug)return "Slug is required.";
+  if(RESERVED_SLUGS.has(slug))return "This slug is reserved.";
+  if(slug!==originalSlug && db.pages[slug])return "This slug is already used by another page.";
+  if(slug!==originalSlug && persistedSlugs.has(slug))return "This slug is still reserved by a saved page. Delete that page and save first.";
+  return "";
+}
 function updateUrl(){
-  const s=cleanSlug($("slug").value); $("slugText").textContent=s||"..."; $("liveUrl").textContent=s?"https://urlx1.site/"+s:"";
+  const s=cleanSlug($("slug").value);
+  $("slugText").textContent=s||"...";
+  $("liveUrl").textContent=s?"https://urlx1.site/"+s:"";
+  const problem=slugProblem(s);
+  $("slug").style.borderColor=problem?"#ef476f":"";
+  $("slug").title=problem||"Slug available";
 }
 function newPage(){
   let base="new-page", slug=base, i=2; while(db.pages[slug]) slug=base+"-"+i++;
@@ -182,8 +200,8 @@ function deletePage(){
 async function saveAll(){
   if(selected){
     const newSlug=cleanSlug($("slug").value);
-    if(!newSlug)return $("status").textContent="❌ Slug is required.";
-    if(originalSlug!==newSlug && db.pages[newSlug]) return $("status").textContent="❌ That slug already exists.";
+    const problem=slugProblem(newSlug);
+    if(problem)return $("status").textContent="❌ "+problem;
     const page=collect();
     if(originalSlug && originalSlug!==newSlug) delete db.pages[originalSlug];
     db.pages[newSlug]=page; selected=newSlug; originalSlug=newSlug;

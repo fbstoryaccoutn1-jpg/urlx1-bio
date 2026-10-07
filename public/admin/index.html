@@ -2,45 +2,189 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>urlx1.site — Admin</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#0b0e15;color:#f7f8fb;font:15px/1.45 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
-.wrap{width:min(100%,980px);margin:0 auto;padding:34px 18px 70px}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:24px}
-h1{font-size:28px;margin:0}.sub{color:#8f98aa;margin-top:5px}.card{background:#111722;border:1px solid #222b3a;border-radius:20px;padding:20px;margin-bottom:18px;box-shadow:0 14px 38px rgba(0,0,0,.18)}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}label{display:block;font-weight:700;font-size:13px;margin-bottom:7px;color:#cbd2df}
-input,textarea{width:100%;border:1px solid #2b3548;border-radius:12px;background:#0c111b;color:#fff;padding:12px 13px;outline:none}
-input:focus,textarea:focus{border-color:#5d72ff}textarea{min-height:92px;resize:vertical}.full{grid-column:1/-1}
-button{border:0;border-radius:12px;padding:12px 16px;font-weight:800;cursor:pointer}.primary{background:#fff;color:#0b0e15}.secondary{background:#20293a;color:#fff}.danger{background:#2a1820;color:#ff9db2}
-.btnrow{display:flex;gap:10px;flex-wrap:wrap}.link-item{padding:14px;border:1px solid #263146;border-radius:14px;margin-top:10px;background:#0d131e}
-.link-grid{display:grid;grid-template-columns:1fr 1.4fr auto;gap:10px;align-items:end}.status{min-height:22px;color:#9ca6b7;font-size:13px}.login{max-width:420px;margin:12vh auto 0}
-.hidden{display:none}.preview{display:flex;align-items:center;gap:13px;padding:13px;background:#0c111b;border-radius:14px;margin-top:12px}.preview img{width:58px;height:58px;border-radius:50%;object-fit:cover;background:#222}
-@media(max-width:720px){.grid{grid-template-columns:1fr}.link-grid{grid-template-columns:1fr}.full{grid-column:auto}.top{align-items:flex-start;flex-direction:column}}
+*{box-sizing:border-box}body{margin:0;background:#0a0d14;color:#f7f8fb;font:14px/1.45 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{width:min(1180px,100%);margin:auto;padding:28px 16px 70px}.hidden{display:none!important}
+.card{background:#111722;border:1px solid #222b3a;border-radius:18px;padding:18px;box-shadow:0 16px 42px rgba(0,0,0,.16)}
+.login{max-width:420px;margin:12vh auto 0}.shell{display:grid;grid-template-columns:280px 1fr;gap:18px}
+.sidebar{position:sticky;top:16px;align-self:start}.brand{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:15px}
+h1,h2,h3{margin:0}.muted{color:#8f98aa}.pages{display:grid;gap:8px;margin-top:14px}
+.pageitem{padding:11px 12px;border:1px solid #273147;border-radius:12px;background:#0c111b;cursor:pointer}
+.pageitem.active{border-color:#7082ff;background:#151c2c}.pageitem strong{display:block}.pageitem small{color:#8f98aa}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:16px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.full{grid-column:1/-1}
+label{display:block;font-size:12px;font-weight:800;color:#cbd2df;margin:0 0 7px}
+input,textarea{width:100%;padding:12px 13px;border-radius:12px;border:1px solid #2b3548;background:#0c111b;color:#fff;outline:none}
+input:focus,textarea:focus{border-color:#6e80ff}textarea{min-height:88px;resize:vertical}
+button{border:0;border-radius:11px;padding:11px 14px;font-weight:800;cursor:pointer}.primary{background:#fff;color:#0a0d14}.secondary{background:#20293a;color:#fff}.danger{background:#321923;color:#ff9fb3}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap}.section{margin-bottom:18px}.linkitem{padding:12px;border:1px solid #273147;border-radius:13px;background:#0d131e;margin-top:9px}
+.linkgrid{display:grid;grid-template-columns:1fr 1.45fr auto;gap:8px;align-items:end}.status{min-height:20px;color:#99a3b5;margin-top:10px}
+.slugpreview{font-size:13px;color:#aab3c3;margin-top:7px}
+@media(max-width:850px){.shell{grid-template-columns:1fr}.sidebar{position:static}.grid,.linkgrid{grid-template-columns:1fr}.full{grid-column:auto}}
 </style></head><body><div class="wrap">
-<section id="loginBox" class="card login"><h1>Admin Login</h1><p class="sub">urlx1.site bio manager</p><label>Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Admin password"><div style="height:12px"></div><button class="primary" id="loginBtn">Login</button><p id="loginStatus" class="status"></p></section>
-<section id="panel" class="hidden">
-<div class="top"><div><h1>Bio Page Admin</h1><div class="sub">Edit profile, preview metadata and buttons.</div></div><div class="btnrow"><a href="/" target="_blank"><button class="secondary">Open Site ↗</button></a><button id="logoutBtn" class="secondary">Logout</button></div></div>
-<div class="card"><h2>Profile</h2><div class="grid">
-<div><label>Name</label><input id="name"></div><div><label>Username</label><input id="username"></div>
-<div class="full"><label>Bio</label><textarea id="bio"></textarea></div>
-<div class="full"><label>Profile Image URL</label><input id="profileImage" type="url"></div>
-<div class="full"><label>Background Image URL (optional)</label><input id="backgroundImage" type="url"></div>
-</div><div class="preview"><img id="avatarPreview"><div><strong id="namePreview">Preview</strong><div class="sub" id="userPreview"></div></div></div></div>
-<div class="card"><h2>Social Preview</h2><div class="grid">
-<div class="full"><label>OG Title</label><input id="ogTitle"></div><div class="full"><label>OG Description</label><textarea id="ogDescription"></textarea></div>
-<div class="full"><label>OG Image URL (recommended 1200×630)</label><input id="ogImage" type="url"></div></div></div>
-<div class="card"><div class="top" style="margin:0"><div><h2 style="margin:0">Buttons</h2><div class="sub">Up to 30 buttons.</div></div><button class="secondary" id="addBtn">+ Add Button</button></div><div id="buttons"></div></div>
-<div class="card"><div class="btnrow"><button class="primary" id="saveBtn">Save Changes</button><button class="secondary" id="reloadBtn">Reload</button></div><p class="status" id="status"></p></div>
-</section></div>
+<section id="login" class="card login">
+  <h1>Admin Login</h1><p class="muted">urlx1.site bio manager</p>
+  <label>Password</label><input id="password" type="password" placeholder="Admin password">
+  <div style="height:12px"></div><button id="loginBtn" class="primary">Login</button><div id="loginStatus" class="status"></div>
+</section>
+
+<section id="app" class="hidden">
+<div class="shell">
+<aside class="card sidebar">
+  <div class="brand"><div><h2>Bio Pages</h2><div class="muted">urlx1.site</div></div><button id="newBtn" class="primary">+ New</button></div>
+  <div id="pagesList" class="pages"></div>
+  <div style="height:14px"></div>
+  <button id="logoutBtn" class="secondary" style="width:100%">Logout</button>
+</aside>
+
+<main>
+  <div id="empty" class="card"><h2>No page selected</h2><p class="muted">Create a new bio page from the left.</p></div>
+
+  <div id="editor" class="hidden">
+    <div class="top">
+      <div><h1 id="editorTitle">Edit Bio Page</h1><div id="liveUrl" class="slugpreview"></div></div>
+      <div class="btnrow"><button id="openBtn" class="secondary">Open Page ↗</button><button id="deleteBtn" class="danger">Delete</button></div>
+    </div>
+
+    <div class="card section"><h3>Link & Redirect</h3><div style="height:12px"></div><div class="grid">
+      <div><label>Slug</label><input id="slug" placeholder="amina-whatsapp"><div class="slugpreview">https://urlx1.site/<span id="slugText">...</span></div></div>
+      <div><label>Redirect delay (seconds)</label><input id="redirectDelay" type="number" min="1" max="30" value="3"></div>
+      <div class="full"><label>Main destination URL</label><input id="destinationUrl" type="url" placeholder="https://destination.com/..."></div>
+    </div></div>
+
+    <div class="card section"><h3>Profile (optional)</h3><div style="height:12px"></div><div class="grid">
+      <div><label>Name</label><input id="name" placeholder="Amina"></div>
+      <div><label>Username</label><input id="username" placeholder="@amina"></div>
+      <div class="full"><label>Bio</label><textarea id="bio" placeholder="Short bio..."></textarea></div>
+      <div class="full"><label>Profile Image URL</label><input id="profileImage" type="url" placeholder="https://..."></div>
+      <div class="full"><label>Background Image URL</label><input id="backgroundImage" type="url" placeholder="https://..."></div>
+    </div></div>
+
+    <div class="card section"><h3>Social Preview (optional)</h3><div style="height:12px"></div><div class="grid">
+      <div class="full"><label>OG Title</label><input id="ogTitle"></div>
+      <div class="full"><label>OG Description</label><textarea id="ogDescription"></textarea></div>
+      <div class="full"><label>OG Image URL</label><input id="ogImage" type="url" placeholder="https://..."></div>
+    </div></div>
+
+    <div class="card section">
+      <div class="top" style="margin:0"><div><h3>Buttons (optional)</h3><div class="muted">Each button can have its own destination.</div></div><button id="addButton" class="secondary">+ Add Button</button></div>
+      <div id="buttons"></div>
+    </div>
+
+    <div class="card">
+      <div class="btnrow"><button id="saveBtn" class="primary">Save All Changes</button><button id="reloadBtn" class="secondary">Reload</button></div>
+      <div id="status" class="status"></div>
+    </div>
+  </div>
+</main>
+</div>
+</section>
+</div>
+
 <script>
-const $=id=>document.getElementById(id);let cfg={};let password=sessionStorage.getItem("bio_admin_password")||"";
-function showPanel(){$("loginBox").classList.add("hidden");$("panel").classList.remove("hidden")}
-function showLogin(){$("panel").classList.add("hidden");$("loginBox").classList.remove("hidden")}
-function fill(c){cfg=c||{};["name","username","bio","profileImage","backgroundImage","ogTitle","ogDescription","ogImage"].forEach(k=>$(k).value=cfg[k]||"");renderButtons();updatePreview()}
-function collect(){return{name:$("name").value,username:$("username").value,bio:$("bio").value,profileImage:$("profileImage").value,backgroundImage:$("backgroundImage").value,ogTitle:$("ogTitle").value,ogDescription:$("ogDescription").value,ogImage:$("ogImage").value,buttons:[...document.querySelectorAll(".link-item")].map(el=>({title:el.querySelector(".bt-title").value,url:el.querySelector(".bt-url").value}))}}
-function renderButtons(){$("buttons").innerHTML="";(cfg.buttons||[]).forEach(b=>addButton(b.title,b.url))}
-function esc(s=""){return String(s).replaceAll("&","&amp;").replaceAll('"',"&quot;").replaceAll("<","&lt;").replaceAll(">","&gt;")}
-function addButton(title="",url=""){const el=document.createElement("div");el.className="link-item";el.innerHTML='<div class="link-grid"><div><label>Button title</label><input class="bt-title" value="'+esc(title)+'" placeholder="Watch Now"></div><div><label>Destination URL</label><input class="bt-url" type="url" value="'+esc(url)+'" placeholder="https://..."></div><div class="btnrow"><button class="secondary up">↑</button><button class="secondary down">↓</button><button class="danger del">Delete</button></div></div>';el.querySelector(".del").onclick=()=>el.remove();el.querySelector(".up").onclick=()=>{const p=el.previousElementSibling;if(p)$("buttons").insertBefore(el,p)};el.querySelector(".down").onclick=()=>{const n=el.nextElementSibling;if(n)$("buttons").insertBefore(n,el)};$("buttons").appendChild(el)}
-function updatePreview(){$("avatarPreview").src=$("profileImage").value||"";$("namePreview").textContent=$("name").value||"Preview";$("userPreview").textContent=$("username").value||""}
-async function loadConfig(){$("status").textContent="Loading…";const r=await fetch("/api/config",{cache:"no-store"});const d=await r.json();if(!r.ok)throw new Error(d.error||"Could not load config");fill(d);$("status").textContent="Loaded."}
-async function save(){$("saveBtn").disabled=true;$("status").textContent="Saving…";try{const r=await fetch("/api/save",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({password,config:collect()})});const d=await r.json();if(!r.ok)throw new Error(d.error||"Save failed");$("status").textContent="✅ Saved. Refresh the public site.";cfg=collect()}catch(e){$("status").textContent="❌ "+e.message}finally{$("saveBtn").disabled=false}}
-async function login(){password=$("password").value;if(!password)return $("loginStatus").textContent="Enter your password.";sessionStorage.setItem("bio_admin_password",password);showPanel();try{await loadConfig()}catch(e){$("status").textContent="⚠️ "+e.message}}
-$("loginBtn").onclick=login;$("password").addEventListener("keydown",e=>{if(e.key==="Enter")login()});$("logoutBtn").onclick=()=>{sessionStorage.removeItem("bio_admin_password");password="";showLogin()};$("saveBtn").onclick=save;$("reloadBtn").onclick=()=>loadConfig().catch(e=>$("status").textContent="❌ "+e.message);$("addBtn").onclick=()=>addButton();["name","username","profileImage"].forEach(id=>$(id).addEventListener("input",updatePreview));if(password){showPanel();loadConfig().catch(e=>$("status").textContent="⚠️ "+e.message)}
+const $=id=>document.getElementById(id);
+let password=sessionStorage.getItem("urlx1_admin_password")||"";
+let db={pages:{}}; let selected=null; let originalSlug=null;
+
+const blankPage=()=>({name:"",username:"",bio:"",profileImage:"",backgroundImage:"",ogTitle:"",ogDescription:"",ogImage:"",destinationUrl:"",redirectDelay:3,buttons:[]});
+const cleanSlug=s=>String(s||"").toLowerCase().trim().replace(/[^a-z0-9-]+/g,"-").replace(/^-+|-+$/g,"").slice(0,80);
+const esc=s=>String(s||"").replaceAll("&","&amp;").replaceAll('"',"&quot;").replaceAll("<","&lt;").replaceAll(">","&gt;");
+
+async function verifyPassword(){
+  const r=await fetch("/api/auth",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({password})});
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(d.error||"Wrong password");
+}
+async function load(){
+  const r=await fetch("/api/config",{cache:"no-store"}); const d=await r.json();
+  if(!r.ok) throw new Error(d.error||"Could not load pages");
+  db=d.pages?d:{pages:{}}; renderList();
+}
+function renderList(){
+  const box=$("pagesList"); box.innerHTML="";
+  const slugs=Object.keys(db.pages||{}).sort();
+  if(!slugs.length){box.innerHTML='<div class="muted">No bio pages yet.</div>';return}
+  for(const slug of slugs){
+    const p=db.pages[slug]||{}; const el=document.createElement("div");
+    el.className="pageitem"+(selected===slug?" active":"");
+    el.innerHTML="<strong>"+esc(p.name||slug)+"</strong><small>/"+esc(slug)+"</small>";
+    el.onclick=()=>selectPage(slug); box.appendChild(el);
+  }
+}
+function selectPage(slug){
+  selected=slug; originalSlug=slug;
+  const p=db.pages[slug]||blankPage();
+  $("empty").classList.add("hidden"); $("editor").classList.remove("hidden");
+  $("slug").value=slug;
+  ["name","username","bio","profileImage","backgroundImage","ogTitle","ogDescription","ogImage","destinationUrl","redirectDelay"].forEach(k=>$(k).value=p[k]??"");
+  renderButtons(p.buttons||[]); updateUrl(); renderList();
+}
+function renderButtons(items){
+  $("buttons").innerHTML=""; items.forEach(b=>addButton(b.title,b.url));
+}
+function addButton(title="",url=""){
+  const el=document.createElement("div"); el.className="linkitem";
+  el.innerHTML='<div class="linkgrid"><div><label>Button title</label><input class="bt-title" value="'+esc(title)+'" placeholder="Watch Now"></div><div><label>Destination URL</label><input class="bt-url" type="url" value="'+esc(url)+'" placeholder="https://..."></div><div class="btnrow"><button class="secondary up">↑</button><button class="secondary down">↓</button><button class="danger del">Delete</button></div></div>';
+  el.querySelector(".del").onclick=()=>el.remove();
+  el.querySelector(".up").onclick=()=>{const p=el.previousElementSibling;if(p)$("buttons").insertBefore(el,p)};
+  el.querySelector(".down").onclick=()=>{const n=el.nextElementSibling;if(n)$("buttons").insertBefore(n,el)};
+  $("buttons").appendChild(el);
+}
+function collect(){
+  return {
+    name:$("name").value,username:$("username").value,bio:$("bio").value,profileImage:$("profileImage").value,backgroundImage:$("backgroundImage").value,
+    ogTitle:$("ogTitle").value,ogDescription:$("ogDescription").value,ogImage:$("ogImage").value,
+    destinationUrl:$("destinationUrl").value,redirectDelay:Number($("redirectDelay").value)||3,
+    buttons:[...document.querySelectorAll(".linkitem")].map(el=>({title:el.querySelector(".bt-title").value,url:el.querySelector(".bt-url").value}))
+  };
+}
+function updateUrl(){
+  const s=cleanSlug($("slug").value); $("slugText").textContent=s||"..."; $("liveUrl").textContent=s?"https://urlx1.site/"+s:"";
+}
+function newPage(){
+  let base="new-page", slug=base, i=2; while(db.pages[slug]) slug=base+"-"+i++;
+  db.pages[slug]=blankPage(); selectPage(slug); $("slug").focus();
+}
+function deletePage(){
+  if(!selected)return;
+  if(!confirm("Delete /"+selected+" ?"))return;
+  delete db.pages[selected]; selected=null; originalSlug=null;
+  $("editor").classList.add("hidden"); $("empty").classList.remove("hidden"); renderList(); $("status").textContent="Page removed locally. Click Save All Changes to publish.";
+}
+async function saveAll(){
+  if(selected){
+    const newSlug=cleanSlug($("slug").value);
+    if(!newSlug)return $("status").textContent="❌ Slug is required.";
+    if(originalSlug!==newSlug && db.pages[newSlug]) return $("status").textContent="❌ That slug already exists.";
+    const page=collect();
+    if(originalSlug && originalSlug!==newSlug) delete db.pages[originalSlug];
+    db.pages[newSlug]=page; selected=newSlug; originalSlug=newSlug;
+  }
+  $("saveBtn").disabled=true; $("status").textContent="Saving…";
+  try{
+    const r=await fetch("/api/save",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({password,pages:db.pages})});
+    const d=await r.json(); if(!r.ok) throw new Error(d.error||"Save failed");
+    $("status").textContent="✅ Saved successfully."; renderList();
+  }catch(e){$("status").textContent="❌ "+e.message}
+  finally{$("saveBtn").disabled=false}
+}
+async function login(){
+  password=$("password").value;
+  if(!password)return $("loginStatus").textContent="Enter your password.";
+  $("loginStatus").textContent="Checking…";
+  try{
+    await verifyPassword(); sessionStorage.setItem("urlx1_admin_password",password);
+    $("login").classList.add("hidden"); $("app").classList.remove("hidden");
+    await load(); $("loginStatus").textContent="";
+  }catch(e){$("loginStatus").textContent="❌ "+e.message}
+}
+$("loginBtn").onclick=login; $("password").addEventListener("keydown",e=>{if(e.key==="Enter")login()});
+$("logoutBtn").onclick=()=>{sessionStorage.removeItem("urlx1_admin_password");location.reload()};
+$("newBtn").onclick=newPage; $("addButton").onclick=()=>addButton(); $("deleteBtn").onclick=deletePage; $("saveBtn").onclick=saveAll;
+$("reloadBtn").onclick=()=>load().then(()=>{if(selected&&db.pages[selected])selectPage(selected)}).catch(e=>$("status").textContent="❌ "+e.message);
+$("slug").addEventListener("input",updateUrl);
+$("openBtn").onclick=()=>{const s=cleanSlug($("slug").value); if(s) window.open("/"+s,"_blank")};
+
+if(password){
+  $("password").value=password;
+  verifyPassword().then(()=>{$("login").classList.add("hidden");$("app").classList.remove("hidden");return load()}).catch(()=>{sessionStorage.removeItem("urlx1_admin_password");password=""});
+}
 </script></body></html>

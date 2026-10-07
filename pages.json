@@ -57,6 +57,19 @@
           "url": "https://urlx1.site/"
         }
       ]
+    },
+    "dsfaksdgzda": {
+      "name": "",
+      "username": "",
+      "bio": "",
+      "profileImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkZzYsX_X8QX3OtjCNbaouWquDv3L-BYkPnbMqz3Q5HA&s=10",
+      "backgroundImage": "",
+      "ogTitle": "whatsapp",
+      "ogDescription": "whatsapp",
+      "ogImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLEGwn0YhV5cbFzfiOAI4vuF4UqOdlo_C-N-5UrPoyew&s",
+      "destinationUrl": "",
+      "redirectDelay": 3,
+      "buttons": []
     }
   }
 }

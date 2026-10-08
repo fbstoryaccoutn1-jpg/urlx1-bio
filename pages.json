@@ -63,6 +63,22 @@
       "redirectDelay": 0,
       "buttons": [],
       "videos": []
+    },
+    "whattsapp": {
+      "pageId": "8b38613d-544e-4b1a-bd94-4f28655a5990",
+      "name": "Aliza",
+      "username": "",
+      "bio": "Come Live",
+      "profileImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLEGwn0YhV5cbFzfiOAI4vuF4UqOdlo_C-N-5UrPoyew&s",
+      "backgroundImage": "https://static.vecteezy.com/system/resources/thumbnails/049/133/892/small/phone-call-camera-and-mic-icon-on-black-circle-vector.jpg",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "destinationUrl": "https://bb.urlxx341.com/?utm_source=jack&utm_medium=joker",
+      "redirectMode": "timed",
+      "redirectDelay": 2,
+      "buttons": [],
+      "videos": []
     }
   }
 }

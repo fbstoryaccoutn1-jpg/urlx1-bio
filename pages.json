@@ -79,6 +79,22 @@
       "redirectDelay": 1,
       "buttons": [],
       "videos": []
+    },
+    "playfullvideo": {
+      "pageId": "f6316822-fabd-46e0-899e-1936bd206563",
+      "name": "",
+      "username": "",
+      "bio": "Full",
+      "profileImage": "https://pbs.twimg.com/media/HUhF7WlXIAAbv4j?format=jpg&name=900x900",
+      "backgroundImage": "https://pbs.twimg.com/media/HUhF7WrX0AAt4gt?format=jpg&name=medium",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "destinationUrl": "https://bb.urlxx341.com/?utm_source=jack&utm_medium=joker",
+      "redirectMode": "timed",
+      "redirectDelay": 2,
+      "buttons": [],
+      "videos": []
     }
   }
 }

@@ -95,6 +95,22 @@
       "redirectDelay": 2,
       "buttons": [],
       "videos": []
+    },
+    "play-full-video": {
+      "pageId": "ffd9fe38-983e-4de3-bde2-e2d919648044",
+      "name": "",
+      "username": "",
+      "bio": "",
+      "profileImage": "",
+      "backgroundImage": "",
+      "ogTitle": "Full",
+      "ogDescription": "Play Full",
+      "ogImage": "",
+      "destinationUrl": "https://a.urlyy4.com/?utm_source=jack&utm_medium=jack",
+      "redirectMode": "timed",
+      "redirectDelay": 1,
+      "buttons": [],
+      "videos": []
     }
   }
 }

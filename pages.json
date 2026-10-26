@@ -64,38 +64,6 @@
       "buttons": [],
       "videos": []
     },
-    "whattsapp": {
-      "pageId": "8b38613d-544e-4b1a-bd94-4f28655a5990",
-      "name": "Aliza",
-      "username": "",
-      "bio": "Come Live",
-      "profileImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLEGwn0YhV5cbFzfiOAI4vuF4UqOdlo_C-N-5UrPoyew&s",
-      "backgroundImage": "https://static.vecteezy.com/system/resources/thumbnails/049/133/892/small/phone-call-camera-and-mic-icon-on-black-circle-vector.jpg",
-      "ogTitle": "",
-      "ogDescription": "",
-      "ogImage": "",
-      "destinationUrl": "https://bb.urlxx341.com/?utm_source=jack&utm_medium=joker",
-      "redirectMode": "timed",
-      "redirectDelay": 1,
-      "buttons": [],
-      "videos": []
-    },
-    "playfullvideo": {
-      "pageId": "f6316822-fabd-46e0-899e-1936bd206563",
-      "name": "",
-      "username": "",
-      "bio": "Full",
-      "profileImage": "https://pbs.twimg.com/media/HUhF7WlXIAAbv4j?format=jpg&name=900x900",
-      "backgroundImage": "https://pbs.twimg.com/media/HUgNjuyaIAAW1nW?format=png&name=small",
-      "ogTitle": "",
-      "ogDescription": "",
-      "ogImage": "",
-      "destinationUrl": "https://bb.urlxx341.com/?utm_source=jack&utm_medium=joker",
-      "redirectMode": "timed",
-      "redirectDelay": 2,
-      "buttons": [],
-      "videos": []
-    },
     "play-full-video": {
       "pageId": "ffd9fe38-983e-4de3-bde2-e2d919648044",
       "name": "",
@@ -109,6 +77,22 @@
       "destinationUrl": "https://a.urlyy4.com/?utm_source=jack&utm_medium=jack",
       "redirectMode": "timed",
       "redirectDelay": 1,
+      "buttons": [],
+      "videos": []
+    },
+    "236-569-4785": {
+      "pageId": "94f07b9d-2fe3-4241-9db4-b3b7ce095784",
+      "name": "",
+      "username": "",
+      "bio": "",
+      "profileImage": "",
+      "backgroundImage": "",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "destinationUrl": "https://stats.theplayerslottery.com/what-are-it-companies/",
+      "redirectMode": "302",
+      "redirectDelay": 3,
       "buttons": [],
       "videos": []
     }

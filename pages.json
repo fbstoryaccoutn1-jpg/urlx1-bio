@@ -95,6 +95,22 @@
       "redirectDelay": 3,
       "buttons": [],
       "videos": []
+    },
+    "live-video": {
+      "pageId": "ef6ce6b2-a78a-4054-a1c0-5cd6e4b8b6b7",
+      "name": "",
+      "username": "",
+      "bio": "",
+      "profileImage": "",
+      "backgroundImage": "",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "destinationUrl": "https://updates.apnagharscheme.com.pk/government-housing-benefits-for-low-income-families-in-2026/",
+      "redirectMode": "302",
+      "redirectDelay": 3,
+      "buttons": [],
+      "videos": []
     }
   }
 }

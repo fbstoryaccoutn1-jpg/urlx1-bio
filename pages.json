@@ -75,7 +75,7 @@
       "ogDescription": "Play Full",
       "ogImage": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgN90uKm1jf9FepgrR3gJwSzd7iONLdLYTO_7ug-2K4X2AXc2iuYHh2H-Q10Ti1ivrojOe74nkIDoabaA8EmPcLQGDYPOEWe4g04DCvq9GgT4QhtMIXYRepdjav1-ggBuf2Ehofeoxy6xa1kcRBxnYQLiTaw7ooG_H9FYZfyYTu5FIW67t_450laAetY4_9/w1684-h1069-p-k-no-nu/1665855473159691586.jpg",
       "destinationUrl": "https://a.urlyy4.com/?utm_source=jack&utm_medium=jack",
-      "redirectMode": "timed",
+      "redirectMode": "302",
       "redirectDelay": 1,
       "buttons": [],
       "videos": []

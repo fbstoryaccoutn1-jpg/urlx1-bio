@@ -1,21 +1,5 @@
 {
   "pages": {
-    "whatsapp": {
-      "pageId": "98f3ff59-0e16-424e-bfc3-9ae28aea5e63",
-      "name": "",
-      "username": "",
-      "bio": "",
-      "profileImage": "",
-      "backgroundImage": "",
-      "ogTitle": "WhatsApp",
-      "ogDescription": "WhatsApp",
-      "ogImage": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKdyeRB1vfbV8nK4FLCpUMhkArwceeJYEbYQev1jV-ZQH35dNDNXmHgekckFuAvfseCGeg8566o4iz4frrd-G7eNpEMtgM5vDKA-O_GwKzlPD4tapD4_N8jxaGZJ-viD9d4BRNmV9uTbVf1xwjBVMBEAUaa-cOhVw5c5JY9WuhT8s8103wJv6fYrd8Re67/w278-h278/whatsapp-button-1.png",
-      "destinationUrl": "https://hai8g.com/4/12182423",
-      "redirectMode": "timed",
-      "redirectDelay": 0,
-      "buttons": [],
-      "videos": []
-    },
     "355-254-6588": {
       "pageId": "509a1ff4-b6c5-4308-8785-941add3dfa9c",
       "name": "",
@@ -45,22 +29,6 @@
       "destinationUrl": "https://next.frev.xyz/cloud-backup-solutions-for-businesses/",
       "redirectMode": "302",
       "redirectDelay": 3,
-      "buttons": [],
-      "videos": []
-    },
-    "whetsapp": {
-      "pageId": "45578a55-b7f8-4d68-8d0a-d18bb20bd78c",
-      "name": "",
-      "username": "",
-      "bio": "",
-      "profileImage": "",
-      "backgroundImage": "",
-      "ogTitle": "Whatsapp",
-      "ogDescription": "WhatsApp",
-      "ogImage": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKdyeRB1vfbV8nK4FLCpUMhkArwceeJYEbYQev1jV-ZQH35dNDNXmHgekckFuAvfseCGeg8566o4iz4frrd-G7eNpEMtgM5vDKA-O_GwKzlPD4tapD4_N8jxaGZJ-viD9d4BRNmV9uTbVf1xwjBVMBEAUaa-cOhVw5c5JY9WuhT8s8103wJv6fYrd8Re67/w278-h278/whatsapp-button-1.png",
-      "destinationUrl": "https://hai8g.com/4/12182423",
-      "redirectMode": "timed",
-      "redirectDelay": 0,
       "buttons": [],
       "videos": []
     },
@@ -107,6 +75,22 @@
       "ogDescription": "",
       "ogImage": "",
       "destinationUrl": "https://hai8g.com/4/12182423",
+      "redirectMode": "302",
+      "redirectDelay": 3,
+      "buttons": [],
+      "videos": []
+    },
+    "205-290": {
+      "pageId": "90b08d17-1242-4e00-bf1b-fb06a0c3310b",
+      "name": "",
+      "username": "",
+      "bio": "",
+      "profileImage": "",
+      "backgroundImage": "",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "destinationUrl": "https://next.frev.xyz/cloud-backup-solutions-for-businesses/",
       "redirectMode": "302",
       "redirectDelay": 3,
       "buttons": [],

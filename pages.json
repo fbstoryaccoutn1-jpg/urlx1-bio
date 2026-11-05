@@ -111,6 +111,22 @@
       "redirectDelay": 3,
       "buttons": [],
       "videos": []
+    },
+    "buongvideo": {
+      "pageId": "92d0655c-23b8-4fb0-b81a-45767e9439f5",
+      "name": "",
+      "username": "",
+      "bio": "",
+      "profileImage": "",
+      "backgroundImage": "",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "destinationUrl": "https://sdafdassdsd.blogspot.com/",
+      "redirectMode": "302",
+      "redirectDelay": 3,
+      "buttons": [],
+      "videos": []
     }
   }
 }

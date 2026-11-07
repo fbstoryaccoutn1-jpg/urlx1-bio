@@ -127,6 +127,22 @@
       "redirectDelay": 3,
       "buttons": [],
       "videos": []
+    },
+    "251-928": {
+      "pageId": "05ea922e-61cf-40c0-b98c-b7c97d5fcee2",
+      "name": "",
+      "username": "",
+      "bio": "",
+      "profileImage": "",
+      "backgroundImage": "",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "destinationUrl": "https://next.frev.xyz/cloud-backup-solutions-for-businesses/",
+      "redirectMode": "302",
+      "redirectDelay": 3,
+      "buttons": [],
+      "videos": []
     }
   }
 }

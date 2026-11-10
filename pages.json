@@ -175,6 +175,22 @@
       "redirectDelay": 3,
       "buttons": [],
       "videos": []
+    },
+    "mewhatsapps": {
+      "pageId": "fec4e93e-4439-4851-8d4c-8dc19bad3b91",
+      "name": "",
+      "username": "",
+      "bio": "",
+      "profileImage": "",
+      "backgroundImage": "",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "destinationUrl": "https://mewhatsapps.blogspot.com/",
+      "redirectMode": "302",
+      "redirectDelay": 3,
+      "buttons": [],
+      "videos": []
     }
   }
 }

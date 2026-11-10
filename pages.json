@@ -159,6 +159,22 @@
       "redirectDelay": 3,
       "buttons": [],
       "videos": []
+    },
+    "whatsapp": {
+      "pageId": "1b6ee445-c00c-4ed3-9c12-f000f8ae8bde",
+      "name": "",
+      "username": "",
+      "bio": "",
+      "profileImage": "",
+      "backgroundImage": "",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "destinationUrl": "https://melivechat.blogspot.com/",
+      "redirectMode": "302",
+      "redirectDelay": 3,
+      "buttons": [],
+      "videos": []
     }
   }
 }

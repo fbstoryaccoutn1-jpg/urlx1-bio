@@ -267,7 +267,7 @@
       "ogDescription": "",
       "ogImage": "",
       "destinationUrl": "https://urlxx349.xyz/?utm_source=jack&amp;utm_medium=Huzzi",
-      "redirectMode": "timed",
+      "redirectMode": "302",
       "redirectDelay": 3,
       "buttons": [],
       "videos": []
